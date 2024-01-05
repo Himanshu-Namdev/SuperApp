@@ -4,8 +4,6 @@ import Homepage from './Components/Homepage/Homepage';
 import Entertainment from './Components/Entertainment/Entertainment';
 import {Routes,Route} from 'react-router-dom';
 function App() {
-  
-
   return (
     <Routes>
       <Route path="/" element={<Signup/>}/>
