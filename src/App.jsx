@@ -6,12 +6,11 @@ import {Routes,Route} from 'react-router-dom';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Signup/>}/>
+      <Route path="/superapp" element={<Signup/>}/>
       <Route path="/SelectCategory" element={<SelectCategory/>} />
       <Route path="/Homepage" element={<Homepage/>} />
       <Route path="/Entertainment" element={<Entertainment />} />
     </Routes>
   )
 }
-
 export default App
