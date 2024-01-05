@@ -1,22 +1,19 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const NewsCard = () => {
+export default function NewsCard() {
   const [news, setNews] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const apiKey = 'ecca7ec31d9d4ff39308723d2475bbab'; // Replace with your actual API key
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
+        const response = await axios.get(
+          'https://newsapi.org/v2/top-headlines?country=us&apiKey=ecca7ec31d9d4ff39308723d2475bbab'
+        );
         setNews(response.data.articles);
       } catch (error) {
         console.error('Error fetching news:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -27,13 +24,11 @@ const NewsCard = () => {
     }, 600000); // Rotate news every minute
 
     return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, [news.length, apiKey]);
+  }, [news.length]);
 
   return (
     <div className="bg-white rounded-lg w-full h-[86%] mt-10 overflow-auto relative">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      {news.length > 0 && (
         <div key={currentIndex} className="w-full min-h-full relative">
           <img
             src={news[currentIndex].urlToImage}
@@ -50,6 +45,4 @@ const NewsCard = () => {
       )}
     </div>
   );
-};
-
-export default NewsCard;
+}
