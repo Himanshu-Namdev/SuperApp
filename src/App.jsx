@@ -1,4 +1,5 @@
 import Signup from './Components/Signup/Signup'
+import SelectCategory from './Components/SelectCategoryRoute/SelectCategory';
 import {Routes,Route} from 'react-router-dom';
 function App() {
   
@@ -6,7 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Signup/>}/>
-      Hello its main
+      <Route path="/SelectCategory" element={<SelectCategory/>} />
     </Routes>
   )
 }
