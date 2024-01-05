@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -5,18 +6,15 @@ const NewsCard = () => {
   const [news, setNews] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const apiKey = 'ecca7ec31d9d4ff39308723d2475bbab'; // Replace with your actual API key
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
-        console.log('News API response:', response);
         setNews(response.data.articles);
       } catch (error) {
         console.error('Error fetching news:', error);
-        setError('Error fetching news. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -35,9 +33,7 @@ const NewsCard = () => {
     <div className="bg-white rounded-lg w-full h-[86%] mt-10 overflow-auto relative">
       {loading ? (
         <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : news.length > 0 && news[currentIndex]?.urlToImage ? (
+      ) : (
         <div key={currentIndex} className="w-full min-h-full relative">
           <img
             src={news[currentIndex].urlToImage}
@@ -51,8 +47,6 @@ const NewsCard = () => {
             <p className="text-gray-700 text-[18px] font-roboto">{news[currentIndex].description}</p>
           </div>
         </div>
-      ) : (
-        <p>No news available.</p>
       )}
     </div>
   );
